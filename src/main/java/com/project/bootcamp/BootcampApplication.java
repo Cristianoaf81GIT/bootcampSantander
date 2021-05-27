@@ -1,5 +1,6 @@
 package com.project.bootcamp;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +17,14 @@ public class BootcampApplication {
 	}
 
 	@Bean
-	public OpenAPI customOpenAPI() {
+	public OpenAPI customOpenAPI(
+		@Value("${application.description}") String description,
+		@Value("${application.version}") String version) {
 		return new OpenAPI()
 			.info(
 				new Info()
-					.title("")
-					.version("1.0")
+					.title(description)
+					.version(version)
 					.termsOfService("http://swagger.io.terms")
 					.license(
 						new License()
